@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Caro</title>
+
+  <!-- Iconos y estilos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .logo {
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+
+    .navbar-nav {
+      display: flex !important;
+      gap: 2rem;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+    }
+
+    .nav-link {
+      color: black !important;
+      font-weight: 500;
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
+    }
+
+    .nav-link:hover {
+      color: #198754 !important;
+    }
+
+    .scroll-horizontal {
+      display: flex;
+      overflow-x: auto;
+      gap: 1rem;
+      padding-bottom: 1rem;
+    }
+
+    .item-horizontal {
+      flex: 0 0 auto;
+      width: 250px;
+    }
+
+    .rounded-circle {
+      width: 100%;
+      max-width: 200px;
+      height: auto;
+    }
+
+    /* Carrito flotante */
+    #cart-modal {
+      position: fixed;
+      top: 80px;
+      right: 20px;
+      width: 350px;
+      max-width: 90vw;
+      background: white;
+      border: 1px solid #ccc;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 1rem;
+      z-index: 9999;
+      display: none;
+      max-height: 80vh;
+      overflow-y: auto;
+      border-radius: 8px;
+    }
+
+    #cart-items .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      background: transparent;
+      border: none;
+      font-size: 1.4rem;
+      color: #dc3545;
+      cursor: pointer;
+    }
+
+    #checkout-form input {
+      background-color: #e9f0ff;
+    }
+
+    /* Ajustes para pantallas pequeñas */
+    @media (max-width: 576px) {
+      #cart-modal {
+        top: 60px;
+        right: 5px;
+        left: 5px;
+        width: auto;
+        max-width: none;
+        max-height: 70vh;
+        border-radius: 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <div class="container d-flex align-items-center justify-content-between">
+      <a class="navbar-brand text-success logo nav-link p-0" href="index.html">caro</a>
+      <div class="d-flex">
+        <a href="#" id="cart-button" class="nav-link position-relative p-0">
+          <i class="fa fa-shopping-cart fa-lg"></i>
+          <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge bg-light text-dark">0</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Productos -->
+  <section class="bg-light py-5">
+    <div class="container">
+      <h4 class="text-center mb-4">Comida destacada</h4>
+      <div class="scroll-horizontal">
+
+        <!-- Producto 1 -->
+        <div class="item-horizontal card p-2">
+          <img src="https://via.placeholder.com/200" class="card-img-top" alt="Club Verde">
+          <div class="card-body text-center">
+            <h6 class="card-title">Club Verde</h6>
+            <p class="text-success fw-bold">$12</p>
+            <input type="number" value="1" min="1" class="form-control form-control-sm mb-2" style="width: 70px; margin: 0 auto;" />
+            <button class="btn btn-success btn-sm buy-btn" data-price="12">Comprar</button>
+          </div>
+        </div>
+
+        <!-- Producto 2 -->
+        <div class="item-horizontal card p-2">
+          <img src="https://via.placeholder.com/200" class="card-img-top" alt="Pizza">
+          <div class="card-body text-center">
+            <h6 class="card-title">Pizza</h6>
+            <p class="text-success fw-bold">$12</p>
+            <input type="number" value="1" min="1" class="form-control form-control-sm mb-2" style="width: 70px; margin: 0 auto;" />
+            <button class="btn btn-success btn-sm buy-btn" data-price="12">Comprar</button>
+          </div>
+        </div>
+
+        <!-- Producto 3 -->
+        <div class="item-horizontal card p-2">
+          <img src="https://via.placeholder.com/200" class="card-img-top" alt="Hamburguesa">
+          <div class="card-body text-center">
+            <h6 class="card-title">Ham</h6>
+            <p class="text-success fw-bold">$10</p>
+            <input type="number" value="1" min="1" class="form-control form-control-sm mb-2" style="width: 70px; margin: 0 auto;" />
+            <button class="btn btn-success btn-sm buy-btn" data-price="10">Comprar</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+    <!-- Productos -->
+  <section class="bg-light py-5">
+    <div class="container">
+      <h4 class="text-center mb-4">Comida destacada</h4>
+      <div class="scroll-horizontal">
+
+        <!-- Producto 1 -->
+        <div class="item-horizontal card p-2">
+          <img src="https://via.placeholder.com/200" class="card-img-top" alt="Club Verde">
+          <div class="card-body text-center">
+            <h6 class="card-title">Club Verde</h6>
+            <p class="text-success fw-bold">$12</p>
+            <input type="number" value="1" min="1" class="form-control form-control-sm mb-2" style="width: 70px; margin: 0 auto;" />
+            <button class="btn btn-success btn-sm buy-btn" data-price="12">Comprar</button>
+          </div>
+        </div>
+
+        <!-- Producto 2 -->
+        <div class="item-horizontal card p-2">
+          <img src="https://via.placeholder.com/200" class="card-img-top" alt="Pizza">
+          <div class="card-body text-center">
+            <h6 class="card-title">Pizza</h6>
+            <p class="text-success fw-bold">$12</p>
+            <input type="number" value="1" min="1" class="form-control form-control-sm mb-2" style="width: 70px; margin: 0 auto;" />
+            <button class="btn btn-success btn-sm buy-btn" data-price="12">Comprar</button>
+          </div>
+        </div>
+
+        <!-- Producto 3 -->
+        <div class="item-horizontal card p-2">
+          <img src="https://via.placeholder.com/200" class="card-img-top" alt="Hamburguesa">
+          <div class="card-body text-center">
+            <h6 class="card-title">Ham</h6>
+            <p class="text-success fw-bold">$10</p>
+            <input type="number" value="1" min="1" class="form-control form-control-sm mb-2" style="width: 70px; margin: 0 auto;" />
+            <button class="btn btn-success btn-sm buy-btn" data-price="10">Comprar</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Productos -->
+  <section class="bg-light py-5">
+    <div class="container">
+      <h4 class="text-center mb-4">Comida destacada</h4>
+      <div class="scroll-horizontal">
+
+        <!-- Producto 1 -->
+        <div class="item-horizontal card p-2">
+          <img src="https://via.placeholder.com/200" class="card-img-top" alt="Club Verde">
+          <div class="card-body text-center">
+            <h6 class="card-title">Club Verde</h6>
+            <p class="text-success fw-bold">$12</p>
+            <input type="number" value="1" min="1" class="form-control form-control-sm mb-2" style="width: 70px; margin: 0 auto;" />
+            <button class="btn btn-success btn-sm buy-btn" data-price="12">Comprar</button>
+          </div>
+        </div>
+
+        <!-- Producto 2 -->
+        <div class="item-horizontal card p-2">
+          <img src="https://via.placeholder.com/200" class="card-img-top" alt="Pizza">
+          <div class="card-body text-center">
+            <h6 class="card-title">Pizza</h6>
+            <p class="text-success fw-bold">$12</p>
+            <input type="number" value="1" min="1" class="form-control form-control-sm mb-2" style="width: 70px; margin: 0 auto;" />
+            <button class="btn btn-success btn-sm buy-btn" data-price="12">Comprar</button>
+          </div>
+        </div>
+
+        <!-- Producto 3 -->
+        <div class="item-horizontal card p-2">
+          <img src="https://via.placeholder.com/200" class="card-img-top" alt="Hamburguesa">
+          <div class="card-body text-center">
+            <h6 class="card-title">Ham</h6>
+            <p class="text-success fw-bold">$10</p>
+            <input type="number" value="1" min="1" class="form-control form-control-sm mb-2" style="width: 70px; margin: 0 auto;" />
+            <button class="btn btn-success btn-sm buy-btn" data-price="10">Comprar</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Carrito Flotante -->
+  <div id="cart-modal">
+    <button id="close-cart" class="close-btn">&times;</button>
+    <h5>Tu carrito:</h5>
+    <div id="cart-items"></div>
+    <p id="total" class="fw-bold mt-2">Total: $0</p>
+
+    <form id="checkout-form">
+      <input type="text" id="nombre" class="form-control my-2" placeholder="Tu nombre" required />
+      <input type="text" id="direccion" class="form-control my-2" placeholder="Dirección" required />
+      <!-- Campo celular eliminado -->
+      <a id="order-btn" class="btn btn-success w-100 mt-2" target="_blank">Enviar por WhatsApp</a>
+    </form>
+  </div>
+
+  <!-- Script del carrito -->
+  <script>
+    const cartButton = document.getElementById("cart-button");
+    const cartModal = document.getElementById("cart-modal");
+    const cartItemsContainer = document.getElementById("cart-items");
+    const totalDisplay = document.getElementById("total");
+    const orderBtn = document.getElementById("order-btn");
+    const closeCartBtn = document.getElementById("close-cart");
+
+    let cart = [];
+
+    cartButton.addEventListener("click", () => {
+      cartModal.style.display = cartModal.style.display === "block" ? "none" : "block";
+    });
+
+    closeCartBtn.addEventListener("click", () => {
+      cartModal.style.display = "none";
+    });
+
+    document.querySelectorAll(".buy-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        // Tomamos el nombre visible en el card-title
+        const cardBody = btn.closest('.card-body');
+        const name = cardBody.querySelector('.card-title').textContent.trim();
+
+        const price = parseFloat(btn.dataset.price);
+        const quantity = parseInt(btn.previousElementSibling.value);
+
+        const existing = cart.find(item => item.name === name);
+        if (existing) {
+          existing.quantity += quantity;
+        } else {
+          cart.push({ name, price, quantity });
+        }
+
+        updateCart();
+        cartModal.style.display = "block";
+      });
+    });
+
+    function updateCart() {
+      cartItemsContainer.innerHTML = "";
+      let total = 0;
+      cart.forEach((item, index) => {
+        total += item.price * item.quantity;
+        const itemDiv = document.createElement("div");
+        itemDiv.classList.add("cart-item");
+        itemDiv.innerHTML = `
+          ${item.quantity} x ${item.name} - $${(item.price * item.quantity).toFixed(2)}
+          <span class="text-danger" style="cursor:pointer" onclick="removeItem(${index})">&times;</span>
+        `;
+        cartItemsContainer.appendChild(itemDiv);
+      });
+
+      const shippingFee = 1.00; // Tarifa fija de envío
+      const totalWithShipping = total + shippingFee;
+
+      totalDisplay.textContent = `Total: $${total.toFixed(2)} + Envío: $${shippingFee.toFixed(2)} = $${totalWithShipping.toFixed(2)}`;
+      document.getElementById("cart-count").textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+      const nombre = document.getElementById("nombre").value || "No especificado";
+      const direccion = document.getElementById("direccion").value || "No especificado";
+
+      const message = `*Nuevo pedido*%0A🧍 Nombre: ${nombre}%0A📍 Dirección: ${direccion}%0A%0A` +
+        cart.map(item => `${item.quantity} x ${item.name} = $${(item.price * item.quantity).toFixed(2)}`).join("%0A") +
+        `%0A💰 *Subtotal: $${total.toFixed(2)}*` +
+        `%0A🚚 *Tarifa de envío: $${shippingFee.toFixed(2)}*` +
+        `%0A💵 *Total: $${totalWithShipping.toFixed(2)}*`;
+
+      const phoneNumber = "593960605372";
+      orderBtn.href = `https://wa.me/${phoneNumber}?text=${message}`;
+    }
+
+    function removeItem(index) {
+      cart.splice(index, 1);
+      updateCart();
+    }
+
+    document.getElementById("checkout-form").addEventListener("input", updateCart);
+  </script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

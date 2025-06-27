@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hola</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-family: 'Pacifico', cursive;
+    }
+
+    .typing {
+      font-size: 3.5rem;
+      color: #198754;
+      border-right: 3px solid #198754;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      animation: typing 4s steps(20, end) forwards, blink 0.8s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 6.5ch }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent }
+    }
+
+    @media (max-width: 768px) {
+      .typing {
+        font-size: 2.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1 class="typing">Hello</h1>
+
+  <script>
+    setTimeout(() => {
+      window.location.href = "2.html";
+    }, 4500); // Espera 4.5 segundos para redirigir
+  </script>
+</body>
+</html>
