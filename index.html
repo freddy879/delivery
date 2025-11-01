@@ -2,144 +2,254 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Flor para Ti</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BEBIDAS YA!</title>
+
+  <!-- Fuentes y estilos -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
   <style>
     body {
-      margin: 0;
-      padding: 0;
-      background: #ffeef2;
+      font-family: 'Roboto', sans-serif;
+      padding-bottom: 70px;
+      background-color: #f8f9fa;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: #ffffffc0 !important;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 6px rgba(19, 18, 18, 0.1);
       display: flex;
-      flex-direction: column;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      min-height: 100vh;
-      font-family: 'Segoe UI', sans-serif;
-      text-align: center;
+      border-radius: 0 0 15px 15px;
+    }
+    .navbar .logo {
+      font-weight: bold;
+      font-size: 1.6rem;
+      color: #28a745; /* Verde */
+    }
+    .halloween-decor span {
+      margin-left: 0.5rem;
+      font-size: 1.2rem;
     }
 
-    .flower-wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    /* Search */
+    .search-bar {
+      max-width: 400px;
+      margin: 1rem auto;
     }
 
-    .flower {
-      position: relative;
-      width: 120px;
-      height: 120px;
-      margin-bottom: 0;
+    /* Productos */
+    .productos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 1rem;
+      padding: 1rem;
     }
-
-    .petal {
-      position: absolute;
-      width: 60px;
-      height: 60px;
-      background: #ff99cc;
-      border-radius: 50%;
-      opacity: 0;
-      animation: bloom 0.5s ease-out forwards;
+    .card {
+      border-radius: 15px;
+      overflow: hidden;
+      background-color: #fff;
+      border: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-
-    .petal1 { top: 0; left: 30px; animation-delay: 0.1s; }
-    .petal2 { top: 30px; left: 0; animation-delay: 0.2s; }
-    .petal3 { top: 60px; left: 30px; animation-delay: 0.3s; }
-    .petal4 { top: 30px; left: 60px; animation-delay: 0.4s; }
-
-    .center {
-      position: absolute;
-      top: 40px;
-      left: 40px;
-      width: 40px;
-      height: 40px;
-      background: #ff3366;
-      border-radius: 50%;
-      z-index: 1;
-      opacity: 0;
-      animation: appear 0.8s ease-out forwards;
-      animation-delay: 0.5s;
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
     }
-
-    .stem {
-      width: 10px;
+    .card img {
+      width: 100%;
       height: 150px;
-      background: #4caf50;
-      border-radius: 5px;
-      margin-top: -10px;
-      animation: grow 1s ease-out forwards;
-      opacity: 0;
-      animation-delay: 0.6s;
+      object-fit: cover;
+      border-bottom: 2px solid #28a745;
+    }
+    .card-body h6 {
+      font-weight: 700;
+      color: #333;
+    }
+    .card-body p {
+      color: #28a745;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    .btn-success {
+      background-color: #28a745;
+      border: none;
+    }
+    .btn-success:hover {
+      background-color: #218838;
     }
 
-    .message {
-      color: #b30059;
-      padding: 20px;
-      max-width: 600px;
-      text-align: justify;
-      line-height: 1.6;
+    /* Bottom Nav */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background-color: #fff;
+      border-top: 1px solid #ccc;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
     }
-
-    .message h1 {
-      font-size: 2em;
-      margin-bottom: 15px;
+    .nav-item {
+      position: relative;
       text-align: center;
+      font-size: 0.9rem;
+      color: #000;
+      text-decoration: none;
+    }
+    .contador {
+      position: absolute;
+      top: -5px;
+      right: -10px;
+      background: red;
+      color: white;
+      border-radius: 50%;
+      font-size: 12px;
+      padding: 2px 6px;
+      font-weight: bold;
     }
 
-    .message p {
-      font-size: 1.2em;
-      margin: 0;
+    /* Titulos */
+    h3 {
+      color: #28a745;
+      text-align: center;
+      margin-bottom: 1rem;
+      font-weight: bold;
     }
 
-    @keyframes bloom {
-      to {
-        opacity: 1;
-        transform: scale(1.1);
+    /* Responsive */
+    @media (max-width: 576px) {
+      .productos-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
       }
-    }
-
-    @keyframes appear {
-      to {
-        opacity: 1;
-        transform: scale(1.1);
-      }
-    }
-
-    @keyframes grow {
-      to {
-        opacity: 1;
-        transform: scaleY(1);
+      .navbar .logo {
+        font-size: 1.3rem;
       }
     }
   </style>
 </head>
+
 <body>
-  <div class="flower-wrapper">
-    <div class="flower">
-      <div class="petal petal1"></div>
-      <div class="petal petal2"></div>
-      <div class="petal petal3"></div>
-      <div class="petal petal4"></div>
-      <div class="center"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <h1 class="logo">¡BEBIDAS YA!</h1>
+    <div class="halloween-decor">
+      <span>🎃</span>
+      <span>🦇</span>
+      <span>🕸️</span>
+      <span>🦉</span>
     </div>
-    <div class="stem"></div>
-  </div>
+  </nav>
 
-  <div class="message">
-    <h1>Para ti, mi amor 💖</h1>
-    <p>
-      Sabes amor mío :) hoy me puse a pensar qué te puedo regalar, y decidí darte una flor donde sus flores jamás se marchiten como el amor mío que nunca se marchitará por ti
-      Solo quiero recordarte que eres lo más valioso que tengo eres mi único propósito en esta vida es amarte, cuidarte y envejecer a tu lado
-      Suena apresurado y aún tenemos toda una vida por delante pero quiero vivirla contigo porque la vida sin ti no tiene sentido
-      Tal vez digas "es una falacia" y se suena loco (cómo la vida no va a tener sentido por alguien) Pero creeme tú no lo entenderas porque
-      tú eres ese alguien que me hace levantarme sonriendo ese alguien donde mi corazón es feliz y quiero que sea así mientras tú me lo permitas.
-      Solo quiero que seas tú en mi vida y así lo será mientras mi corazón palpite siempre te elegirá a ti TE AMO
-    </p>
-  </div>
+  <div class="container mt-4">
 
-  <audio autoplay loop>
-    <source src="https://www.youtube.com/watch?v=zBTDS5dv0yg" type="audio/mpeg">
-    Tu navegador no soporta audio HTML.
-  </audio>
+    <!-- Buscador -->
+    <div class="search-bar">
+      <input type="text" id="busqueda" class="form-control" placeholder="Buscar bebida..." />
+    </div>
+
+    <h3>BEBIDAS</h3>
+
+    <!-- Grid de productos -->
+    <div class="productos-grid" id="contenedor-productos">
+      <!-- Producto ejemplo 1 -->
+      <div class="card producto">
+        <a href="g.html" onclick="guardarProductoDesdeCard(this)">
+          <img src="caja de corona.jpeg" alt="Producto 1" />
+        </a>
+        <div class="card-body text-center">
+          <h6 class="card-title">CAJA DE CORONA</h6>
+          <p>$32.00</p>
+          <input type="number" value="1" min="1" class="form-control form-control-sm mb-2" />
+          <button class="btn btn-success btn-sm buy-btn" onclick="comprarProductoDesdeCard(this)">Comprar</button>
+        </div>
+      </div>
+
+      <!-- Producto ejemplo 2 -->
+      <div class="card producto">
+        <a href="g.html" onclick="guardarProductoDesdeCard(this)">
+          <img src="SIXPACK-CORONA-355-ML.webp" alt="Producto 2" />
+        </a>
+        <div class="card-body text-center">
+          <h6 class="card-title">SIXPACK DE SIXPACK-CORONA-355-ML</h6>
+          <p>$9.00</p>
+          <input type="number" value="1" min="1" class="form-control form-control-sm mb-2" />
+          <button class="btn btn-success btn-sm buy-btn" onclick="comprarProductoDesdeCard(this)">Comprar</button>
+        </div>
+      </div>
+
+      <!-- Producto ejemplo 3 -->
+      <div class="card producto">
+        <a href="g.html" onclick="guardarProductoDesdeCard(this)">
+          <img src="java de club.jpeg" alt="Producto 3" />
+        </a>
+        <div class="card-body text-center">
+          <h6 class="card-title">JAVA DE CLUB VERDE</h6>
+          <p>$22.00</p>
+          <input type="number" value="1" min="1" class="form-control form-control-sm mb-2" />
+          <button class="btn btn-success btn-sm buy-btn" onclick="comprarProductoDesdeCard(this)">Comprar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+   
+
+  <!-- Bottom Nav -->
+  <nav class="bottom-nav">
+    <a href="index.html" class="nav-item">
+      <i class="fas fa-home fa-lg"></i>
+      <div>Inicio</div>
+    </a>
+    <a href="carrito.html" class="nav-item">
+      <i class="fas fa-shopping-cart fa-lg"></i>
+      <span id="contador-carrito" class="contador">0</span>
+      <div>Carrito</div>
+    </a>
+  </nav>
+
+  <!-- Scripts -->
+  <script>
+    function guardarProductoDesdeCard(elemento) {
+      const card = elemento.closest('.producto');
+      const nombre = card.querySelector('.card-title').textContent.trim();
+      const precioTexto = card.querySelector('p').textContent.trim();
+      const precio = parseFloat(precioTexto.replace('$', ''));
+      const imagen = card.querySelector('img').src;
+      const producto = { nombre, precio, imagen, cantidad: 1 };
+      localStorage.setItem('productoSeleccionado', JSON.stringify(producto));
+    }
+
+    function comprarProductoDesdeCard(boton) {
+      guardarProductoDesdeCard(boton);
+      window.location.href = 'g.html';
+    }
+
+    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    document.getElementById("contador-carrito").textContent = carrito.reduce((acc, item) => acc + item.cantidad, 0);
+
+    document.getElementById("busqueda").addEventListener("input", function () {
+      const filtro = this.value.toLowerCase();
+      document.querySelectorAll(".producto").forEach(card => {
+        const titulo = card.querySelector(".card-title").textContent.toLowerCase();
+        card.style.display = titulo.includes(filtro) ? "block" : "none";
+      });
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
 
